@@ -211,9 +211,9 @@ PRs are reviewed for:
 
 ## Questions?
 
-- 🐛 Found a bug? [Open an Issue](https://github.com/sourcecube/ai-prompt-templates/issues)
-- 💡 Have a feature request? [Open an Issue](https://github.com/sourcecube/ai-prompt-templates/issues)
-- 💬 Need help? [Discussions](https://github.com/sourcecube/ai-prompt-templates/discussions)
+- 🐛 Found a bug? [Open an Issue](https://github.com/ma8899174yu/ai-prompt-templates/issues)
+- 💡 Have a feature request? [Open an Issue](https://github.com/ma8899174yu/ai-prompt-templates/issues)
+- 💬 Need help? [Discussions](https://github.com/ma8899174yu/ai-prompt-templates/discussions)
 
 ---
 

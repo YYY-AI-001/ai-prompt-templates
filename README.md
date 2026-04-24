@@ -3,10 +3,10 @@
 <div align="center">
 
 ![Banner](https://img.shields.io/badge/AI-Prompt%20Library-6366F1?style=for-the-badge&logo=robot&logoColor=white)
-[![GitHub Stars](https://img.shields.io/github/stars/sourcecube/ai-prompt-templates?style=for-the-badge)](https://github.com/sourcecube/ai-prompt-templates/stargazers)
+[![GitHub Stars](https://img.shields.io/github/stars/ma8899174yu/ai-prompt-templates?style=for-the-badge)](https://github.com/ma8899174yu/ai-prompt-templates/stargazers)
 [![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
 [![Contributors](https://img.shields.io/badge/Contributors-Welcome-FF6B6B?style=for-the-badge)](CONTRIBUTING.md)
-[![PRs](https://img.shields.io/badge/PRs-Welcomed-59Crus?style=for-the-badge)](https://github.com/sourcecube/ai-prompt-templates/pulls)
+[![PRs](https://img.shields.io/badge/PRs-Welcomed-59Crus?style=for-the-badge)](https://github.com/ma8899174yu/ai-prompt-templates/pulls)
 
 **Production-ready AI prompt templates | FLUX · Midjourney · ComfyUI · Natural Language**
 
@@ -289,8 +289,8 @@ This project is licensed under the [MIT License](./LICENSE).
 
 🔗 [B站主页](https://space.bilibili.com/3546745917148074) ·
 [YouTube](https://www.youtube.com/@SC2778) ·
-[GitHub Issues](https://github.com/sourcecube/ai-prompt-templates/issues) ·
-[Pull Requests](https://github.com/sourcecube/ai-prompt-templates/pulls)
+[GitHub Issues](https://github.com/ma8899174yu/ai-prompt-templates/issues) ·
+[Pull Requests](https://github.com/ma8899174yu/ai-prompt-templates/pulls)
 
 *Making AI creation simpler*
 
