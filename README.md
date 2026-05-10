@@ -1,297 +1,113 @@
-# AI Prompt Templates
+﻿# 源力魔方提示词资产库
 
-<div align="center">
+这里不是“提示词收藏夹”，而是一个面向 **AI 工作流创作** 的提示词资产库。
 
-![Banner](https://img.shields.io/badge/AI-Prompt%20Library-6366F1?style=for-the-badge&logo=robot&logoColor=white)
-[![GitHub Stars](https://img.shields.io/github/stars/ma8899174yu/ai-prompt-templates?style=for-the-badge)](https://github.com/ma8899174yu/ai-prompt-templates/stargazers)
-[![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
-[![Contributors](https://img.shields.io/badge/Contributors-Welcome-FF6B6B?style=for-the-badge)](CONTRIBUTING.md)
-[![PRs](https://img.shields.io/badge/PRs-Welcomed-59Crus?style=for-the-badge)](https://github.com/ma8899174yu/ai-prompt-templates/pulls)
+目标是把一次性 prompt 整理成可以复制、修改、分类、复用和持续迭代的资产。
 
-**Production-ready AI prompt templates | FLUX · Midjourney · ComfyUI · Natural Language**
+## 这个库解决什么问题
 
-📺 [B站 Video Tutorials](https://space.bilibili.com/3546745917148074) · 🔗 [YouTube Channel](https://www.youtube.com/@SC2778)
+很多提示词的问题不是“不够高级”，而是：
 
-</div>
+- 只能用一次，下次找不到
+- 变量没有抽出来，不能复用
+- 不知道适合哪个模型或平台
+- 没有使用说明，别人复制后不会改
+- 没有版本和标签，积累不起来
 
----
+所以这个库的基本单位不是“一个 prompt”，而是：
 
-## Table of Contents
+> **一张提示词资产卡片。**
 
-- [Overview](#overview)
-- [Features](#features)
-- [Quick Start](#quick-start)
-- [Repository Structure](#repository-structure)
-- [Statistics](#statistics)
-- [Prompts by Category](#prompts-by-category)
-- [FLUX vs Stable Diffusion](#flux-vs-stable-diffusion)
-- [ComfyUI Workflows](#comfyui-workflows)
-- [Contributing](#contributing)
-- [License](#license)
+## 适合谁用
 
----
+| 用户 | 可以怎么用 |
+|------|------|
+| AI 生图新手 | 直接复制示例，理解提示词结构 |
+| ComfyUI 初学者 | 学习工作流相关提示词怎么组织 |
+| AI 视频创作者 | 参考分镜、首尾帧和角色一致性 prompt |
+| 内容创作者 | 快速生成 B站封面、公众号图文和知识卡片 |
+| 想做 AI 副业的人 | 把提示词、教程和资料包沉淀成公开资产 |
 
-## Overview
+## 仓库结构
 
-AI Prompt Templates is a curated collection of **production-ready** AI image generation prompts, covering FLUX, Midjourney, ComfyUI workflows, and natural language descriptions. Every prompt has been tested and includes parameter recommendations.
-
-> ⚡ **Goal**: Make AI creation simpler — copy, paste, generate.
-
----
-
-## Features
-
-| Feature | Description |
-|:--------|:------------|
-| 🎯 **Ready to Use** | All prompts work out-of-the-box, no debugging needed |
-| 📊 **Complete Parameters** | Steps, CFG, Sampler, resolution — fully specified |
-| 🧪 **Tested & Verified** | Every prompt verified through actual generation |
-| 🌐 **Bilingual** | English prompts + Chinese usage guides |
-| 🔄 **Multiple Platforms** | FLUX, Midjourney, ComfyUI, Natural Language |
-| 📚 **Structured** | Organized by type, style, and use case |
-
----
-
-## Quick Start
-
-### Step 1 — Choose Your Category
-
-| What do you want to generate? | Where to look |
-|:------------------------------|:--------------|
-| Commercial portrait / photography | `prompts/FLUX/photorealistic/` |
-| Cinematic visuals | `prompts/FLUX/cinematic/` |
-| Illustration / concept art | `prompts/FLUX/illustration/` |
-| Traditional Chinese style | `prompts/FLUX/illustration/` |
-| Midjourney prompts | `prompts/MJ/` |
-| Importable FLUX workflows | `prompts/ComfyUI/workflows/` |
-| Natural language prompts | `prompts/Natural-Language/` |
-
-### Step 2 — Copy & Use
-
-1. Open the `.md` file for your chosen prompt
-2. Copy the English text from the **Positive Prompt** section
-3. Paste into FLUX / Midjourney / ComfyUI
-4. Adjust settings using the **Parameter Recommendations** in the file
-
-### Step 3 — Parameter Reference
-
-```
-FLUX General Parameters:
-  Steps:    25–40
-  CFG:      1.5–3.5
-  Sampler:  euler_ancestral / dpmpp_2m / eigen Galois
-  Resolution:
-    1:1   → 1024×1024
-    3:4   → 1024×1360 (portrait)
-    3:2   → 1536×1024 (landscape)
-    21:9  → 1792×768 (cinematic)
-```
-
----
-
-## Repository Structure
-
-```
-ai-prompt-templates/
-├── README.md                         # This file
-├── LICENSE                           # MIT License
-├── CONTRIBUTING.md                   # Contribution guidelines
+```text
+.
+├── README.md
+├── LICENSE
+├── docs/
+│   ├── asset-standard.md
+│   └── usage-guide.md
+├── templates/
+│   └── prompt-asset-card.md
 └── prompts/
-    ├── FLUX/                         # FLUX prompts
-    │   ├── FLUX-GUIDE.md            # FLUX writing guide
-    │   ├── photorealistic/          # Photorealistic photography
-    │   ├── cinematic/               # Cinematic visuals
-    │   ├── illustration/            # Illustration & concept art
-    │   └── concept-art/              # Concept art & design
-    ├── MJ/                           # Midjourney prompts
-    │   ├── photorealistic/
-    │   └── illustration/
-    ├── ComfyUI/                      # ComfyUI workflows
-    │   └── workflows/
-    └── Natural-Language/             # Natural language prompts
-        ├── creative/
-        └── technical/
+    ├── content-creator/
+    │   ├── bilibili-cover.md
+    │   └── wechat-article-outline.md
+    ├── image-generation/
+    │   ├── chinese-model-scan-cover.md
+    │   └── workflow-diagram-style.md
+    ├── ai-video/
+    │   └── seedance-shot-prompt.md
+    └── comfyui/
+        └── workflow-debug-checklist.md
 ```
 
----
+## 当前资产
 
-## Statistics
+| 分类 | 资产 | 用途 |
+|------|------|------|
+| 内容创作 | [B站 AI 教程封面](./prompts/content-creator/bilibili-cover.md) | 为 AI 工作流教程生成高点击率封面方向 |
+| 内容创作 | [公众号文章大纲](./prompts/content-creator/wechat-article-outline.md) | 将视频选题扩展为公众号图文 |
+| AI 生图 | [国产/开源模型扫盲封面](./prompts/image-generation/chinese-model-scan-cover.md) | 为模型扫盲文章生成封面图 |
+| AI 生图 | [工作流示意图风格](./prompts/image-generation/workflow-diagram-style.md) | 生成节点、流程、生产线概念图 |
+| AI 视频 | [Seedance 单镜头提示词](./prompts/ai-video/seedance-shot-prompt.md) | 将分镜转成视频生成 prompt |
+| ComfyUI | [工作流报错排查清单](./prompts/comfyui/workflow-debug-checklist.md) | 辅助整理 ComfyUI 排错内容 |
 
-| Type | Count | Description |
-|:-----|:-----:|:------------|
-| FLUX Prompts | 18 | Portrait · Landscape · Illustration · Concept Art |
-| Midjourney Prompts | 4 | Curated selection |
-| ComfyUI Workflows | 2 | FLUX-compatible |
-| Natural Language Prompts | 6 | Creative + Technical |
-| **Total** | **30** | All production-ready |
+## 资产卡片格式
 
----
+每个提示词文件都尽量包含：
 
-## Prompts by Category
+- 标题
+- 类型
+- 适用场景
+- 适用模型/平台
+- 输入变量
+- 标准版提示词
+- 增强版提示词
+- 输出格式
+- 使用建议
+- 标签
+- 版本记录
 
-### 🔥 FLUX Photorealistic
+模板见：[prompt-asset-card.md](./templates/prompt-asset-card.md)
 
-| Prompt | Use Case | Difficulty |
-|:-------|:---------|:----------:|
-| [Portrait Master](./prompts/FLUX/photorealistic/portrait-master.md) | Commercial photography | ⭐⭐⭐ |
-| [Corporate Portrait](./prompts/FLUX/photorealistic/portrait-corporate.md) | Resume / professional photos | ⭐⭐ |
-| [Passport Photo](./prompts/FLUX/photorealistic/portrait-passport.md) | Visa / ID documents | ⭐⭐ |
-| [Product Render](./prompts/FLUX/photorealistic/product-render.md) | E-commerce hero images | ⭐⭐⭐ |
-| [Food Photography](./prompts/FLUX/photorealistic/food-photography.md) | Culinary content | ⭐⭐⭐ |
-| [Wildlife Photo](./prompts/FLUX/photorealistic/wildlife-photo.md) | Nature photography | ⭐⭐⭐ |
-| [Street Night China](./prompts/FLUX/photorealistic/street-night-china.md) | Urban night scenes | ⭐⭐⭐ |
-| [Fashion Tokyo](./prompts/FLUX/photorealistic/fashion-street-tokyo.md) | Street fashion | ⭐⭐⭐ |
-| [Cyberpunk City](./prompts/FLUX/photorealistic/cyberpunk-city.md) | Sci-fi urban scenes | ⭐⭐⭐ |
-| [Aerial Shanghai](./prompts/FLUX/photorealistic/aerial-shanghai.md) | Cityscape aerial | ⭐⭐⭐ |
-| [Scandinavian Interior](./prompts/FLUX/photorealistic/interior-scandinavian.md) | Interior design | ⭐⭐ |
+## 和源力魔方内容体系的关系
 
-### 🎬 FLUX Cinematic
+这个库承接这些内容：
 
-| Prompt | Use Case | Difficulty |
-|:-------|:---------|:----------:|
-| [Cinematic Portrait](./prompts/FLUX/cinematic/portrait-cinematic.md) | Short video thumbnails | ⭐⭐⭐ |
-| [Mountain Epic](./prompts/FLUX/cinematic/mountain-epic.md) | Wallpapers / posters | ⭐⭐⭐⭐ |
-| [Wuxia Hero](./prompts/FLUX/cinematic/wuxia-hero.md) | Chinese martial arts | ⭐⭐⭐⭐ |
-| [Interstellar Ship](./prompts/FLUX/cinematic/interstellar-ship.md) | Sci-fi concept | ⭐⭐⭐⭐ |
+- B站：AI 工作流扫盲、ComfyUI 实操、AI 视频分镜
+- 公众号：图文教程、模型观察、工具资讯
+- GitHub：提示词资产和公开模板
+- RunningHub：云端工作流学习和案例演示
+- 知识星球：系统教程、资料库和答疑
 
-### 🎨 FLUX Illustration & Concept Art
+## 配合 Codex Skill 使用
 
-| Prompt | Use Case | Difficulty |
-|:-------|:---------|:----------:|
-| [Chinese Goddess Wuxia](./prompts/FLUX/illustration/chinese-goddess-wuxia.md) | Traditional Chinese art | ⭐⭐⭐ |
-| [Dragon Knight](./prompts/FLUX/illustration/dragon-knight.md) | Game concept art | ⭐⭐⭐ |
-| [Ink Landscape](./prompts/FLUX/illustration/ink-landscape.md) | Chinese aesthetics | ⭐⭐⭐ |
-| [Chinese Landscape](./prompts/FLUX/illustration/chinese-landscape.md) | Landscape art | ⭐⭐⭐ |
-| [Architecture Future](./prompts/FLUX/concept-art/architecture-future.md) | Futuristic architecture | ⭐⭐⭐ |
-| [Mech Warrior](./prompts/FLUX/concept-art/mech-warrior.md) | Mecha design | ⭐⭐⭐ |
-| [Underwater World](./prompts/FLUX/concept-art/underwater-world.md) | Fantasy environments | ⭐⭐⭐ |
-| [Warriors Charge](./prompts/FLUX/concept-art/warriors-charge.md) | Battle scenes | ⭐⭐⭐⭐ |
+可以配合 `prompt-asset-director` 使用：
 
-### 🌟 Midjourney Prompts
-
-| Prompt | Use Case | Category |
-|:-------|:---------|:--------:|
-| [Emotional Portrait](./prompts/MJ/photorealistic/emotional-portrait.md) | Portrait photography | photorealistic |
-| [Vintage Camera](./prompts/MJ/photorealistic/vintage-camera.md) | Vintage photography | photorealistic |
-| [Chinese Goddess](./prompts/MJ/illustration/chinese-goddess.md) | Traditional Chinese | illustration |
-| [Fantasy Dragon](./prompts/MJ/illustration/fantasy-dragon.md) | Western fantasy | illustration |
-
-### ⚙️ ComfyUI Workflows
-
-| Workflow | Description |
-|:---------|:------------|
-| [Portrait Workflow](./prompts/ComfyUI/workflows/flux-portrait-workflow.md) | FLUX portrait with ControlNet & LoRA |
-| [Cinematic Workflow](./prompts/ComfyUI/workflows/flux-cinematic-workflow.md) | FLUX cinematic with post-processing |
-
-> **How to install**: Download the `.md` file, copy the JSON or node configuration, and import into ComfyUI.
-
-### 📝 Natural Language Prompts
-
-| Prompt | Use Case | Category |
-|:-------|:---------|:--------:|
-| [Brand Story](./prompts/Natural-Language/creative/brand-story.md) | Brand storytelling | creative |
-| [Children's Book](./prompts/Natural-Language/creative/childrens-book.md) | Illustration for kids | creative |
-| [Profile Avatar](./prompts/Natural-Language/creative/profile-avatar.md) | Personal avatars | creative |
-| [Product Showcase](./prompts/Natural-Language/technical/product-showcase.md) | E-commerce display | technical |
-| [Tech Infographic](./prompts/Natural-Language/technical/tech-infographic.md) | Tech diagrams | technical |
-| [Video Thumbnail](./prompts/Natural-Language/technical/video-thumbnail.md) | YouTube / B站 thumbnails | technical |
-
----
-
-## FLUX vs Stable Diffusion
-
-FLUX uses **natural language prompts** — fundamentally different from traditional SD keyword-stacking:
-
-| Feature | FLUX ✅ | Stable Diffusion ❌ |
-|:--------|:------:|:------------------:|
-| Prompt Style | Complete natural sentences | Comma-separated keywords |
-| Sentence Length | Long sentences work perfectly | Degrades past 75 tokens |
-| Negative Prompts | Usually not needed | Required but limited effect |
-| Quality Tags | Unnecessary | `masterpiece, best quality` needed |
-| Resolution Sensitivity | Low | High — wrong ratios degrade quality |
-
-### Style Comparison
-
-❌ **Old SD Style** (deprecated):
-
-```
-masterpiece, best quality, 1girl, blonde hair, blue eyes,
-white dress, flower field, sunny, professional photography
+```text
+用 $prompt-asset-director 把这个提示词整理成提示词资产卡片。
 ```
 
-✅ **FLUX Style** (recommended):
+也可以配合 `seedance-storyboard-director` 使用：
 
-```
-A young woman with blonde hair and bright blue eyes wearing a flowing white dress
-stands in a field of wildflowers. Golden hour sunlight creates a warm, ethereal glow.
-Shot on medium format film with soft bokeh.
+```text
+用 $seedance-storyboard-director 把这个短片想法拆成分镜，再生成 Seedance prompt。
 ```
 
-> 💡 Want to master FLUX writing? Check out [FLUX-GUIDE.md](./prompts/FLUX/FLUX-GUIDE.md)
+## 维护原则
 
----
-
-## ComfyUI Workflows
-
-FLUX workflows ready for import into ComfyUI:
-
-#### Portrait Workflow
-- **Features**: ControlNet + LoRA + Post-processing
-- **Models**: flux1-dev.safetensors + flux-controlnetPortrait-v10
-- **Use case**: Commercial portrait photography
-
-#### Cinematic Workflow
-- **Features**: Enhanced color grading + upscaling
-- **Models**: FLUX Dev + 4x-UltraSharp upscaler
-- **Use case**: Film-style visuals, posters, backgrounds
-
-> **Installation**: Download the `.md` file → copy the JSON configuration → paste into ComfyUI
-
----
-
-## Contributing
-
-Contributions are welcome! Please read [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines on:
-- Quality standards
-- File format specifications
-- Submission process
-
-### Quick Checklist Before Submitting
-
-- [ ] Prompt works out-of-the-box (no debugging required)
-- [ ] Includes complete parameter recommendations
-- [ ] Contains effect description and clear use cases
-- [ ] Uses natural language style (not keyword-stacking)
-- [ ] English is grammatically correct, no garbled text
-- [ ] File naming follows convention (lowercase + hyphens)
-
----
-
-## Video Tutorials
-
-| Tutorial | Platform | Status |
-|:---------|:---------|:-------|
-| FLUX Prompt Writing Guide | B站 | ✅ Published |
-| ComfyUI FLUX Workflow Setup | B站 | ✅ Published |
-| Natural Language Prompting | B站 | 🔄 In production |
-
----
-
-## License
-
-This project is licensed under the [MIT License](./LICENSE).
-
----
-
-<div align="center">
-
-⭐ If this helps you, please star the repo!
-
-🔗 [B站主页](https://space.bilibili.com/3546745917148074) ·
-[YouTube](https://www.youtube.com/@SC2778) ·
-[GitHub Issues](https://github.com/ma8899174yu/ai-prompt-templates/issues) ·
-[Pull Requests](https://github.com/ma8899174yu/ai-prompt-templates/pulls)
-
-*Making AI creation simpler*
-
-</div>
+- 少而精，优先沉淀真实会用的资产
+- 不堆玄学词，尽量写清楚变量和使用场景
+- 每个 prompt 都要能被修改，而不是只能复制
+- 优先服务 AI 工作流、ComfyUI、AI 视频和内容副业主线
