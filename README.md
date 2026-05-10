@@ -1,32 +1,25 @@
-﻿# 源力魔方提示词资产库
+# 源力魔方开源模型提示词库
 
-这里不是“提示词收藏夹”，而是一个面向 **AI 工作流创作** 的提示词资产库。
+一个只收纳 **AI 生图 / AI 生视频提示词** 的纯提示词库。
 
-目标是把一次性 prompt 整理成可以复制、修改、分类、复用和持续迭代的资产。
+这里只保留可直接用于图像和视频生成的 prompt 示例，围绕主流开源模型的提示词习惯来组织。
 
-## 这个库解决什么问题
+## 覆盖方向
 
-很多提示词的问题不是“不够高级”，而是：
-
-- 只能用一次，下次找不到
-- 变量没有抽出来，不能复用
-- 不知道适合哪个模型或平台
-- 没有使用说明，别人复制后不会改
-- 没有版本和标签，积累不起来
-
-所以这个库的基本单位不是“一个 prompt”，而是：
-
-> **一张提示词资产卡片。**
-
-## 适合谁用
-
-| 用户 | 可以怎么用 |
-|------|------|
-| AI 生图新手 | 直接复制示例，理解提示词结构 |
-| ComfyUI 初学者 | 学习工作流相关提示词怎么组织 |
-| AI 视频创作者 | 参考分镜、首尾帧和角色一致性 prompt |
-| 内容创作者 | 快速生成 B站封面、公众号图文和知识卡片 |
-| 想做 AI 副业的人 | 把提示词、教程和资料包沉淀成公开资产 |
+| 类型 | 模型 / 方向 | 说明 |
+|------|------|------|
+| 生图 | Universal | 适合大多数文生图模型的通用提示词结构 |
+| 生图 | FLUX / FLUX.2 | 自然语言、摄影、电影感、产品图、概念图 |
+| 生图 | Qwen-Image | 中文文字、海报、知识卡片、人像材质 |
+| 生图 | SDXL / Stable Diffusion | 关键词结构、负面提示词、LoRA 友好 |
+| 生图 | SD3.5 / HiDream / Chroma | 新一代 DiT 图像模型、摄影、广告、风格化 |
+| 生图 | Hunyuan / GLM / ERNIE / LongCat / Z-Image | 国产开源图像模型常用场景 |
+| 生视频 | Universal Video | 通用短镜头、图生视频、首尾帧 |
+| 生视频 | Wan | T2V / I2V / First-Last-Frame 风格 |
+| 生视频 | HunyuanVideo | 电影感运动、人物与场景镜头 |
+| 生视频 | CogVideoX | 简短动作、产品展示、镜头运动 |
+| 生视频 | LTX / Mochi | 快速短镜头、运动和风格测试 |
+| 生视频 | SkyReels / Open-Sora / FramePack | 长镜头、开源视频模型、低门槛测试 |
 
 ## 仓库结构
 
@@ -34,113 +27,62 @@
 .
 ├── README.md
 ├── LICENSE
-├── docs/
-│   ├── asset-standard.md
-│   ├── research-notes.md
-│   └── usage-guide.md
-├── templates/
-│   └── prompt-asset-card.md
 └── prompts/
-    ├── content-creator/
-    │   ├── bilibili-cover.md
-    │   ├── bilibili-script-3min.md
-    │   ├── knowledge-star-post.md
-    │   ├── title-pack-generator.md
-    │   └── wechat-article-outline.md
-    ├── image-generation/
-    │   ├── chinese-model-scan-cover.md
-    │   ├── flux-natural-language-builder.md
-    │   ├── knowledge-card-visual.md
-    │   ├── model-comparison-infographic.md
-    │   └── workflow-diagram-style.md
-    ├── ai-video/
-    │   ├── character-consistency.md
-    │   ├── keyframe-pair.md
-    │   ├── seedance-reference-pack.md
-    │   ├── seedance-shot-prompt.md
-    │   └── storyboard-shot-list.md
-    └── comfyui/
-        ├── model-path-checklist.md
-        ├── runninghub-to-local.md
-        ├── workflow-debug-checklist.md
-        └── workflow-explainer.md
+    ├── image/
+    │   ├── universal/
+    │   ├── flux/
+    │   ├── qwen-image/
+    │   ├── sdxl/
+    │   ├── sd3-hidream/
+    │   └── chinese-open-models/
+    └── video/
+        ├── universal/
+        ├── wan/
+        ├── hunyuan-video/
+        ├── cogvideox/
+        ├── ltx-mochi/
+        ├── skyreels/
+        ├── open-sora/
+        └── framepack/
 ```
 
-## 当前资产
+## 快速选择
 
-| 分类 | 资产 | 用途 |
-|------|------|------|
-| 内容创作 | [B站 AI 教程封面](./prompts/content-creator/bilibili-cover.md) | 为 AI 工作流教程生成高点击率封面方向 |
-| 内容创作 | [3 分钟 B站脚本](./prompts/content-creator/bilibili-script-3min.md) | 生成 AI 工作流扫盲短视频脚本 |
-| 内容创作 | [标题包生成器](./prompts/content-creator/title-pack-generator.md) | 为视频和公众号生成系列化标题 |
-| 内容创作 | [公众号文章大纲](./prompts/content-creator/wechat-article-outline.md) | 将视频选题扩展为公众号图文 |
-| 内容创作 | [知识星球延伸帖](./prompts/content-creator/knowledge-star-post.md) | 把公开内容延伸成星球资料和答疑 |
-| AI 生图 | [国产/开源模型扫盲封面](./prompts/image-generation/chinese-model-scan-cover.md) | 为模型扫盲文章生成封面图 |
-| AI 生图 | [FLUX 自然语言构建器](./prompts/image-generation/flux-natural-language-builder.md) | 把关键词改成自然语言生图 prompt |
-| AI 生图 | [知识卡片视觉](./prompts/image-generation/knowledge-card-visual.md) | 生成教程卡片和资料包视觉 |
-| AI 生图 | [模型对比信息图](./prompts/image-generation/model-comparison-infographic.md) | 生成模型分类和能力对比图 |
-| AI 生图 | [工作流示意图风格](./prompts/image-generation/workflow-diagram-style.md) | 生成节点、流程、生产线概念图 |
-| AI 视频 | [分镜表生成器](./prompts/ai-video/storyboard-shot-list.md) | 把短片想法拆成可执行镜头 |
-| AI 视频 | [角色一致性锚点](./prompts/ai-video/character-consistency.md) | 生成跨镜头角色设定和锚点 |
-| AI 视频 | [首尾帧提示词](./prompts/ai-video/keyframe-pair.md) | 为图生视频准备首帧和尾帧 |
-| AI 视频 | [Seedance 参考素材包](./prompts/ai-video/seedance-reference-pack.md) | 整理文本、图像、视频、音频参考 |
-| AI 视频 | [Seedance 单镜头提示词](./prompts/ai-video/seedance-shot-prompt.md) | 将分镜转成视频生成 prompt |
-| ComfyUI | [工作流解释器](./prompts/comfyui/workflow-explainer.md) | 把复杂工作流解释给新手 |
-| ComfyUI | [模型路径检查清单](./prompts/comfyui/model-path-checklist.md) | 检查模型、LoRA、VAE、ControlNet 放置位置 |
-| ComfyUI | [工作流报错排查清单](./prompts/comfyui/workflow-debug-checklist.md) | 辅助整理 ComfyUI 排错内容 |
-| ComfyUI | [RunningHub 转本地检查](./prompts/comfyui/runninghub-to-local.md) | 将云端工作流迁移到本地前做差异检查 |
+| 你想做什么 | 先看 |
+|------|------|
+| 通用高质量生图 | [Universal Image](./prompts/image/universal/) |
+| FLUX 风格自然语言提示词 | [FLUX](./prompts/image/flux/) |
+| 中文海报 / 中文文字图 | [Qwen-Image](./prompts/image/qwen-image/) |
+| SDXL / LoRA / 关键词风格 | [SDXL](./prompts/image/sdxl/) |
+| SD3.5 / HiDream / Chroma | [SD3 + HiDream](./prompts/image/sd3-hidream/) |
+| 国产开源模型测试 | [Chinese Open Models](./prompts/image/chinese-open-models/) |
+| 通用 AI 视频短镜头 | [Universal Video](./prompts/video/universal/) |
+| Wan 图生视频 / 首尾帧 | [Wan](./prompts/video/wan/) |
+| HunyuanVideo 电影镜头 | [HunyuanVideo](./prompts/video/hunyuan-video/) |
+| CogVideoX 简洁动作镜头 | [CogVideoX](./prompts/video/cogvideox/) |
+| LTX / Mochi 快速视频测试 | [LTX / Mochi](./prompts/video/ltx-mochi/) |
+| 长视频 / 开源视频模型测试 | [SkyReels](./prompts/video/skyreels/) / [Open-Sora](./prompts/video/open-sora/) / [FramePack](./prompts/video/framepack/) |
 
-## 资产卡片格式
+## 使用原则
 
-每个提示词文件都尽量包含：
+### 生图
 
-- 标题
-- 类型
-- 适用场景
-- 适用模型/平台
-- 输入变量
-- 标准版提示词
-- 增强版提示词
-- 输出格式
-- 使用建议
-- 标签
-- 版本记录
+- FLUX / Qwen / 新一代图像模型：优先使用自然语言完整句子。
+- SDXL / 传统 SD：关键词结构仍然有效，负面提示词更重要。
+- 中文文字图：优先用 Qwen-Image、GLM-Image、ERNIE-Image 等更擅长文字的模型；重要文字建议后期排版复核。
+- 产品图、封面图、信息图：提示词里要明确主体、构图、光线、材质、背景和用途。
 
-模板见：[prompt-asset-card.md](./templates/prompt-asset-card.md)
+### 生视频
 
-## 研究来源
+- 一个 prompt 只描述一个镜头。
+- 一个镜头只做一个主要动作。
+- 明确主体、动作、镜头运动、光线、场景、时长。
+- 图生视频优先使用参考图。
+- 首尾帧模式适合控制姿势、转场和镜头起止状态。
+- 避免长动作链，例如“走进房间、拿书、翻开、微笑、转身离开”。
 
-本库的资产结构参考了公开 prompt engineering 指南、提示词库和 AI 视频/图像工作流资料，但所有资产均按「源力魔方」内容体系重新组织，不直接搬运第三方提示词。
+## 参考来源
 
-整理记录见：[research-notes.md](./docs/research-notes.md)
+本库参考了公开模型文档和提示词社区的通用经验，包括 FLUX 自然语言提示词写法、Qwen-Image 文字渲染经验、Stable Diffusion 3.5 提示词结构、Wan / SkyReels / LTX 等视频模型的镜头描述方式，以及多个开源提示词库的分类方式。
 
-## 和源力魔方内容体系的关系
-
-这个库承接这些内容：
-
-- B站：AI 工作流扫盲、ComfyUI 实操、AI 视频分镜
-- 公众号：图文教程、模型观察、工具资讯
-- GitHub：提示词资产和公开模板
-- RunningHub：云端工作流学习和案例演示
-- 知识星球：系统教程、资料库和答疑
-
-## 配合 Codex Skill 使用
-
-可以配合 `prompt-asset-director` 使用：
-
-```text
-用 $prompt-asset-director 把这个提示词整理成提示词资产卡片。
-```
-
-也可以配合 `seedance-storyboard-director` 使用：
-
-```text
-用 $seedance-storyboard-director 把这个短片想法拆成分镜，再生成 Seedance prompt。
-```
-
-## 维护原则
-
-- 少而精，优先沉淀真实会用的资产
-- 不堆玄学词，尽量写清楚变量和使用场景
-- 每个 prompt 都要能被修改，而不是只能复制
-- 优先服务 AI 工作流、ComfyUI、AI 视频和内容副业主线
+所有提示词均重新整理为源力魔方自己的示例，不直接搬运第三方 prompt。
