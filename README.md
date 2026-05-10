@@ -4,6 +4,32 @@
 
 这里只保留可直接用于图像和视频生成的 prompt 示例，围绕主流开源模型的提示词习惯来组织。
 
+## 可视化入口
+
+现在仓库增加了一个轻量静态浏览器：[index.html](./index.html)
+
+它可以用来：
+
+- 按生图 / 生视频筛选提示词
+- 按模型方向筛选提示词
+- 搜索场景、模型和文件名
+- 查看模型写法矩阵
+- 快速打开或复制提示词文件路径
+
+如果开启 GitHub Pages，可以把 `index.html` 作为提示词库的可视化首页。
+
+## 模型写法指南
+
+新增：[各模型高质量提示词写法](./guides/model-prompt-writing.md)
+
+这份指南总结了不同模型更适合的 prompt 结构：
+
+- FLUX / SD3.5 / HiDream：自然语言完整描述
+- Qwen-Image / 中文图像模型：短文本、清晰版式、明确文字位置
+- SDXL / Stable Diffusion：关键词分组、负面提示词、LoRA 触发词
+- Wan / HunyuanVideo / CogVideoX：一个 prompt 对应一个镜头
+- LTX / SkyReels / FramePack：连续镜头、自然段描述、稳定主体
+
 ## 覆盖方向
 
 | 类型 | 模型 / 方向 | 说明 |
@@ -27,6 +53,9 @@
 .
 ├── README.md
 ├── LICENSE
+├── index.html
+├── guides/
+│   └── model-prompt-writing.md
 └── prompts/
     ├── image/
     │   ├── universal/

@@ -1,0 +1,587 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>源力魔方开源模型提示词库</title>
+  <style>
+    :root {
+      --bg: #f6f7f2;
+      --panel: #ffffff;
+      --ink: #17201d;
+      --muted: #5d6863;
+      --line: #dfe5dd;
+      --teal: #0f766e;
+      --blue: #2563eb;
+      --amber: #b45309;
+      --rose: #be123c;
+      --shadow: 0 10px 30px rgba(23, 32, 29, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif;
+      line-height: 1.5;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .app {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 320px minmax(0, 1fr);
+    }
+
+    aside {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      padding: 24px;
+      border-right: 1px solid var(--line);
+      background: #fbfcf8;
+      overflow: auto;
+    }
+
+    main {
+      padding: 28px;
+    }
+
+    .brand {
+      margin-bottom: 24px;
+    }
+
+    .brand h1 {
+      margin: 0 0 8px;
+      font-size: 24px;
+      letter-spacing: 0;
+    }
+
+    .brand p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .search {
+      display: grid;
+      gap: 10px;
+      margin-bottom: 22px;
+    }
+
+    input {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      color: var(--ink);
+      font: inherit;
+      padding: 12px 14px;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: var(--teal);
+      box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.12);
+    }
+
+    .filter-group {
+      margin: 22px 0;
+    }
+
+    .filter-group h2 {
+      margin: 0 0 10px;
+      font-size: 13px;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    button {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      color: var(--ink);
+      padding: 8px 10px;
+      font: inherit;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      border-color: var(--teal);
+    }
+
+    button.active {
+      background: var(--teal);
+      border-color: var(--teal);
+      color: #fff;
+    }
+
+    .quick-links {
+      display: grid;
+      gap: 8px;
+      margin-top: 24px;
+    }
+
+    .quick-links a {
+      display: block;
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 22px;
+    }
+
+    .topbar h2 {
+      margin: 0 0 6px;
+      font-size: 28px;
+      letter-spacing: 0;
+    }
+
+    .topbar p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(90px, 1fr));
+      gap: 10px;
+      min-width: 300px;
+    }
+
+    .stat {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 8px;
+      padding: 12px;
+      box-shadow: var(--shadow);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 22px;
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .matrix {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 22px;
+    }
+
+    .model-card {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 8px;
+      padding: 14px;
+      min-height: 150px;
+      box-shadow: var(--shadow);
+    }
+
+    .model-card h3 {
+      margin: 0 0 8px;
+      font-size: 16px;
+    }
+
+    .model-card p {
+      margin: 0 0 12px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .model-card .bar {
+      height: 8px;
+      border-radius: 8px;
+      background: #e8ece6;
+      overflow: hidden;
+      margin-top: 8px;
+    }
+
+    .model-card .bar span {
+      display: block;
+      height: 100%;
+      border-radius: 8px;
+    }
+
+    .natural { background: var(--teal); width: 90%; }
+    .keyword { background: var(--blue); width: 72%; }
+    .textfit { background: var(--amber); width: 82%; }
+    .motion { background: var(--rose); width: 88%; }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin: 24px 0 12px;
+    }
+
+    .section-title h2 {
+      margin: 0;
+      font-size: 20px;
+    }
+
+    .count {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .prompt-card {
+      display: grid;
+      gap: 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      padding: 16px;
+      box-shadow: var(--shadow);
+      min-height: 220px;
+    }
+
+    .prompt-card h3 {
+      margin: 0;
+      font-size: 17px;
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .pill {
+      border-radius: 8px;
+      background: #eef3ef;
+      color: #25413b;
+      padding: 4px 8px;
+      font-size: 12px;
+    }
+
+    .prompt-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .path {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      overflow-wrap: anywhere;
+    }
+
+    .actions {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      margin-top: auto;
+    }
+
+    .actions a,
+    .actions button {
+      text-decoration: none;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #f9faf7;
+      color: var(--ink);
+      padding: 8px 10px;
+      font-size: 13px;
+    }
+
+    .empty {
+      display: none;
+      border: 1px dashed var(--line);
+      border-radius: 8px;
+      padding: 28px;
+      color: var(--muted);
+      background: var(--panel);
+    }
+
+    .empty.show {
+      display: block;
+    }
+
+    @media (max-width: 1100px) {
+      .app {
+        grid-template-columns: 1fr;
+      }
+
+      aside {
+        position: static;
+        height: auto;
+      }
+
+      .matrix,
+      .grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .topbar {
+        display: grid;
+      }
+
+      .stats {
+        min-width: 0;
+      }
+    }
+
+    @media (max-width: 680px) {
+      main,
+      aside {
+        padding: 18px;
+      }
+
+      .matrix,
+      .grid,
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      .topbar h2 {
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside>
+      <div class="brand">
+        <h1>源力魔方提示词库</h1>
+        <p>面向开源生图、生视频模型的 prompt 浏览器。</p>
+      </div>
+
+      <div class="search">
+        <input id="searchInput" type="search" placeholder="搜索模型、场景、文件名">
+      </div>
+
+      <div class="filter-group">
+        <h2>类型</h2>
+        <div class="filters" id="typeFilters"></div>
+      </div>
+
+      <div class="filter-group">
+        <h2>模型</h2>
+        <div class="filters" id="modelFilters"></div>
+      </div>
+
+      <div class="quick-links">
+        <a href="./README.md">README</a>
+        <a href="./guides/model-prompt-writing.md">模型写法指南</a>
+        <a href="./prompts/image/universal/">通用生图</a>
+        <a href="./prompts/video/universal/">通用生视频</a>
+      </div>
+    </aside>
+
+    <main>
+      <div class="topbar">
+        <div>
+          <h2>开源模型 Prompt Map</h2>
+          <p>用筛选和模型写法矩阵快速找到适合当前模型的提示词。</p>
+        </div>
+        <div class="stats">
+          <div class="stat"><strong id="totalCount">0</strong><span>提示词</span></div>
+          <div class="stat"><strong id="imageCount">0</strong><span>生图</span></div>
+          <div class="stat"><strong id="videoCount">0</strong><span>生视频</span></div>
+        </div>
+      </div>
+
+      <div class="matrix" aria-label="模型写法矩阵">
+        <article class="model-card">
+          <h3>自然语言派</h3>
+          <p>FLUX、SD3.5、HiDream 更适合完整句：主体、关系、构图、光线一次说清。</p>
+          <div class="bar"><span class="natural"></span></div>
+        </article>
+        <article class="model-card">
+          <h3>关键词派</h3>
+          <p>SDXL 仍然吃关键词分组，负面提示词和参数会明显影响结果。</p>
+          <div class="bar"><span class="keyword"></span></div>
+        </article>
+        <article class="model-card">
+          <h3>文字排版派</h3>
+          <p>Qwen-Image、国产图像模型适合短标题、中文海报和知识卡片。</p>
+          <div class="bar"><span class="textfit"></span></div>
+        </article>
+        <article class="model-card">
+          <h3>镜头运动派</h3>
+          <p>Wan、HunyuanVideo、LTX 等视频模型要写成一个清楚的镜头。</p>
+          <div class="bar"><span class="motion"></span></div>
+        </article>
+      </div>
+
+      <div class="section-title">
+        <h2>提示词集合</h2>
+        <span class="count" id="visibleCount">0 个结果</span>
+      </div>
+      <div class="empty" id="emptyState">没有匹配结果，换一个模型或关键词试试。</div>
+      <div class="grid" id="promptGrid"></div>
+    </main>
+  </div>
+
+  <script>
+    const prompts = [
+      { title: "Cinematic Portrait", type: "生图", model: "Universal Image", scene: "写实人像", path: "prompts/image/universal/cinematic-portrait.md" },
+      { title: "Product Hero Shot", type: "生图", model: "Universal Image", scene: "产品主视觉", path: "prompts/image/universal/product-hero-shot.md" },
+      { title: "Environment Concept", type: "生图", model: "Universal Image", scene: "场景概念", path: "prompts/image/universal/environment-concept.md" },
+      { title: "Character Design Sheet", type: "生图", model: "Universal Image", scene: "角色设定", path: "prompts/image/universal/character-design-sheet.md" },
+      { title: "FLUX Editorial Poster", type: "生图", model: "FLUX", scene: "编辑风海报", path: "prompts/image/flux/flux-editorial-poster.md" },
+      { title: "FLUX Photoreal Street", type: "生图", model: "FLUX", scene: "街拍写实", path: "prompts/image/flux/flux-photoreal-street.md" },
+      { title: "FLUX Product Material", type: "生图", model: "FLUX", scene: "产品材质", path: "prompts/image/flux/flux-product-material.md" },
+      { title: "Chinese Text Poster", type: "生图", model: "Qwen-Image", scene: "中文海报", path: "prompts/image/qwen-image/chinese-text-poster.md" },
+      { title: "Knowledge Card", type: "生图", model: "Qwen-Image", scene: "知识卡片", path: "prompts/image/qwen-image/knowledge-card.md" },
+      { title: "Realistic Human Material", type: "生图", model: "Qwen-Image", scene: "人像材质", path: "prompts/image/qwen-image/realistic-human-material.md" },
+      { title: "SDXL Cinematic Portrait", type: "生图", model: "SDXL", scene: "电影感人像", path: "prompts/image/sdxl/sdxl-cinematic-portrait.md" },
+      { title: "SDXL LoRA Character", type: "生图", model: "SDXL", scene: "LoRA角色", path: "prompts/image/sdxl/sdxl-lora-character.md" },
+      { title: "SD3.5 Typography Ad", type: "生图", model: "SD3.5", scene: "文字广告", path: "prompts/image/sd3-hidream/sd3-5-typography-ad.md" },
+      { title: "HiDream Photoreal Scene", type: "生图", model: "HiDream", scene: "写实场景", path: "prompts/image/sd3-hidream/hidream-photoreal-scene.md" },
+      { title: "Chroma Anime Character", type: "生图", model: "Chroma", scene: "动漫角色", path: "prompts/image/sd3-hidream/chroma-anime-character.md" },
+      { title: "Hunyuan Image Instruct", type: "生图", model: "Chinese Open Models", scene: "中文指令", path: "prompts/image/chinese-open-models/hunyuan-image-instruct.md" },
+      { title: "Z-Image Fast Cover", type: "生图", model: "Chinese Open Models", scene: "快速封面", path: "prompts/image/chinese-open-models/z-image-fast-cover.md" },
+      { title: "ERNIE GLM Infographic", type: "生图", model: "Chinese Open Models", scene: "信息图", path: "prompts/image/chinese-open-models/ernie-glm-infographic.md" },
+      { title: "T2V Cinematic Shot", type: "生视频", model: "Universal Video", scene: "电影短镜头", path: "prompts/video/universal/t2v-cinematic-shot.md" },
+      { title: "I2V Subtle Motion", type: "生视频", model: "Universal Video", scene: "图生视频", path: "prompts/video/universal/i2v-subtle-motion.md" },
+      { title: "Product Turntable", type: "生视频", model: "Universal Video", scene: "产品旋转", path: "prompts/video/universal/product-turntable.md" },
+      { title: "Wan I2V Single Action", type: "生视频", model: "Wan", scene: "单动作图生视频", path: "prompts/video/wan/wan-i2v-single-action.md" },
+      { title: "Wan FLF2V Bird Takeoff", type: "生视频", model: "Wan", scene: "首尾帧", path: "prompts/video/wan/wan-flf2v-bird-takeoff.md" },
+      { title: "Wan T2V Cozy Kitchen", type: "生视频", model: "Wan", scene: "生活场景", path: "prompts/video/wan/wan-t2v-cozy-kitchen.md" },
+      { title: "Hunyuan Cinematic Walk", type: "生视频", model: "HunyuanVideo", scene: "人物行走", path: "prompts/video/hunyuan-video/cinematic-walk.md" },
+      { title: "Hunyuan Environment Reveal", type: "生视频", model: "HunyuanVideo", scene: "场景揭示", path: "prompts/video/hunyuan-video/environment-reveal.md" },
+      { title: "CogVideoX Simple Human Action", type: "生视频", model: "CogVideoX", scene: "人物动作", path: "prompts/video/cogvideox/simple-human-action.md" },
+      { title: "CogVideoX Product Demo", type: "生视频", model: "CogVideoX", scene: "产品演示", path: "prompts/video/cogvideox/product-demo.md" },
+      { title: "LTX Mochi Fast Motion Test", type: "生视频", model: "LTX / Mochi", scene: "快速运动", path: "prompts/video/ltx-mochi/fast-motion-test.md" },
+      { title: "LTX Mochi Anime Short", type: "生视频", model: "LTX / Mochi", scene: "动漫短镜头", path: "prompts/video/ltx-mochi/anime-style-short.md" },
+      { title: "SkyReels Long Market Shot", type: "生视频", model: "SkyReels", scene: "长镜头", path: "prompts/video/skyreels/skyreels-long-market-shot.md" },
+      { title: "Open-Sora Landscape Motion", type: "生视频", model: "Open-Sora", scene: "风景运动", path: "prompts/video/open-sora/open-sora-landscape-motion.md" },
+      { title: "FramePack Character Loop", type: "生视频", model: "FramePack", scene: "持续小动作", path: "prompts/video/framepack/framepack-character-loop.md" }
+    ];
+
+    const state = {
+      type: "全部",
+      model: "全部",
+      query: ""
+    };
+
+    const typeFilters = document.querySelector("#typeFilters");
+    const modelFilters = document.querySelector("#modelFilters");
+    const promptGrid = document.querySelector("#promptGrid");
+    const visibleCount = document.querySelector("#visibleCount");
+    const emptyState = document.querySelector("#emptyState");
+    const searchInput = document.querySelector("#searchInput");
+
+    function unique(values) {
+      return ["全部", ...Array.from(new Set(values)).sort((a, b) => a.localeCompare(b, "zh-CN"))];
+    }
+
+    function createButtons(container, values, key) {
+      container.innerHTML = values.map(value => {
+        const active = state[key] === value ? " active" : "";
+        return `<button class="${active}" type="button" data-key="${key}" data-value="${value}">${value}</button>`;
+      }).join("");
+    }
+
+    function renderFilters() {
+      createButtons(typeFilters, unique(prompts.map(item => item.type)), "type");
+      createButtons(modelFilters, unique(prompts.map(item => item.model)), "model");
+    }
+
+    function matches(item) {
+      const query = state.query.trim().toLowerCase();
+      const typeMatch = state.type === "全部" || item.type === state.type;
+      const modelMatch = state.model === "全部" || item.model === state.model;
+      const queryMatch = !query || `${item.title} ${item.type} ${item.model} ${item.scene} ${item.path}`.toLowerCase().includes(query);
+      return typeMatch && modelMatch && queryMatch;
+    }
+
+    function renderCards() {
+      const filtered = prompts.filter(matches);
+      visibleCount.textContent = `${filtered.length} 个结果`;
+      emptyState.classList.toggle("show", filtered.length === 0);
+      promptGrid.innerHTML = filtered.map(item => `
+        <article class="prompt-card">
+          <div>
+            <h3>${item.title}</h3>
+            <div class="meta">
+              <span class="pill">${item.type}</span>
+              <span class="pill">${item.model}</span>
+              <span class="pill">${item.scene}</span>
+            </div>
+          </div>
+          <p>适合用于${item.scene}场景，可按当前模型习惯调整主体、光线、镜头和限制条件。</p>
+          <span class="path">${item.path}</span>
+          <div class="actions">
+            <a href="./${item.path}">打开文件</a>
+            <button type="button" data-copy="${item.path}">复制路径</button>
+          </div>
+        </article>
+      `).join("");
+    }
+
+    function renderStats() {
+      document.querySelector("#totalCount").textContent = prompts.length;
+      document.querySelector("#imageCount").textContent = prompts.filter(item => item.type === "生图").length;
+      document.querySelector("#videoCount").textContent = prompts.filter(item => item.type === "生视频").length;
+    }
+
+    document.addEventListener("click", event => {
+      const filterButton = event.target.closest("button[data-key]");
+      if (filterButton) {
+        state[filterButton.dataset.key] = filterButton.dataset.value;
+        renderFilters();
+        renderCards();
+      }
+
+      const copyButton = event.target.closest("button[data-copy]");
+      if (copyButton) {
+        navigator.clipboard.writeText(copyButton.dataset.copy).then(() => {
+          copyButton.textContent = "已复制";
+          window.setTimeout(() => {
+            copyButton.textContent = "复制路径";
+          }, 1200);
+        });
+      }
+    });
+
+    searchInput.addEventListener("input", event => {
+      state.query = event.target.value;
+      renderCards();
+    });
+
+    renderStats();
+    renderFilters();
+    renderCards();
+  </script>
+</body>
+</html>
