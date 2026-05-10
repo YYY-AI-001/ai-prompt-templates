@@ -36,20 +36,34 @@
 ├── LICENSE
 ├── docs/
 │   ├── asset-standard.md
+│   ├── research-notes.md
 │   └── usage-guide.md
 ├── templates/
 │   └── prompt-asset-card.md
 └── prompts/
     ├── content-creator/
     │   ├── bilibili-cover.md
+    │   ├── bilibili-script-3min.md
+    │   ├── knowledge-star-post.md
+    │   ├── title-pack-generator.md
     │   └── wechat-article-outline.md
     ├── image-generation/
     │   ├── chinese-model-scan-cover.md
+    │   ├── flux-natural-language-builder.md
+    │   ├── knowledge-card-visual.md
+    │   ├── model-comparison-infographic.md
     │   └── workflow-diagram-style.md
     ├── ai-video/
-    │   └── seedance-shot-prompt.md
+    │   ├── character-consistency.md
+    │   ├── keyframe-pair.md
+    │   ├── seedance-reference-pack.md
+    │   ├── seedance-shot-prompt.md
+    │   └── storyboard-shot-list.md
     └── comfyui/
-        └── workflow-debug-checklist.md
+        ├── model-path-checklist.md
+        ├── runninghub-to-local.md
+        ├── workflow-debug-checklist.md
+        └── workflow-explainer.md
 ```
 
 ## 当前资产
@@ -57,11 +71,24 @@
 | 分类 | 资产 | 用途 |
 |------|------|------|
 | 内容创作 | [B站 AI 教程封面](./prompts/content-creator/bilibili-cover.md) | 为 AI 工作流教程生成高点击率封面方向 |
+| 内容创作 | [3 分钟 B站脚本](./prompts/content-creator/bilibili-script-3min.md) | 生成 AI 工作流扫盲短视频脚本 |
+| 内容创作 | [标题包生成器](./prompts/content-creator/title-pack-generator.md) | 为视频和公众号生成系列化标题 |
 | 内容创作 | [公众号文章大纲](./prompts/content-creator/wechat-article-outline.md) | 将视频选题扩展为公众号图文 |
+| 内容创作 | [知识星球延伸帖](./prompts/content-creator/knowledge-star-post.md) | 把公开内容延伸成星球资料和答疑 |
 | AI 生图 | [国产/开源模型扫盲封面](./prompts/image-generation/chinese-model-scan-cover.md) | 为模型扫盲文章生成封面图 |
+| AI 生图 | [FLUX 自然语言构建器](./prompts/image-generation/flux-natural-language-builder.md) | 把关键词改成自然语言生图 prompt |
+| AI 生图 | [知识卡片视觉](./prompts/image-generation/knowledge-card-visual.md) | 生成教程卡片和资料包视觉 |
+| AI 生图 | [模型对比信息图](./prompts/image-generation/model-comparison-infographic.md) | 生成模型分类和能力对比图 |
 | AI 生图 | [工作流示意图风格](./prompts/image-generation/workflow-diagram-style.md) | 生成节点、流程、生产线概念图 |
+| AI 视频 | [分镜表生成器](./prompts/ai-video/storyboard-shot-list.md) | 把短片想法拆成可执行镜头 |
+| AI 视频 | [角色一致性锚点](./prompts/ai-video/character-consistency.md) | 生成跨镜头角色设定和锚点 |
+| AI 视频 | [首尾帧提示词](./prompts/ai-video/keyframe-pair.md) | 为图生视频准备首帧和尾帧 |
+| AI 视频 | [Seedance 参考素材包](./prompts/ai-video/seedance-reference-pack.md) | 整理文本、图像、视频、音频参考 |
 | AI 视频 | [Seedance 单镜头提示词](./prompts/ai-video/seedance-shot-prompt.md) | 将分镜转成视频生成 prompt |
+| ComfyUI | [工作流解释器](./prompts/comfyui/workflow-explainer.md) | 把复杂工作流解释给新手 |
+| ComfyUI | [模型路径检查清单](./prompts/comfyui/model-path-checklist.md) | 检查模型、LoRA、VAE、ControlNet 放置位置 |
 | ComfyUI | [工作流报错排查清单](./prompts/comfyui/workflow-debug-checklist.md) | 辅助整理 ComfyUI 排错内容 |
+| ComfyUI | [RunningHub 转本地检查](./prompts/comfyui/runninghub-to-local.md) | 将云端工作流迁移到本地前做差异检查 |
 
 ## 资产卡片格式
 
@@ -80,6 +107,12 @@
 - 版本记录
 
 模板见：[prompt-asset-card.md](./templates/prompt-asset-card.md)
+
+## 研究来源
+
+本库的资产结构参考了公开 prompt engineering 指南、提示词库和 AI 视频/图像工作流资料，但所有资产均按「源力魔方」内容体系重新组织，不直接搬运第三方提示词。
+
+整理记录见：[research-notes.md](./docs/research-notes.md)
 
 ## 和源力魔方内容体系的关系
 
